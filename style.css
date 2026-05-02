@@ -26,26 +26,31 @@ body {
   min-height: 100vh;
 }
 
-/* Nav — warm */
+/* Nav — overlaid on hero video */
 .nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.1rem 2rem;
-  background: var(--bg);
-  border-bottom: 1px solid var(--rule);
+  padding: 1.3rem 2rem;
+  background: transparent;
+  border-bottom: none;
 }
 .logo {
   font-family: "Fraunces", Georgia, serif;
   font-size: 1.2rem;
   font-weight: 400;
   font-style: italic;
-  color: var(--fg);
+  color: #fff;
   letter-spacing: -0.01em;
 }
-.tagline { font-size: 0.82rem; color: var(--muted); }
+.tagline { font-size: 0.82rem; color: rgba(247,243,236,0.6); }
 
-/* Hero video — stays dark */
+/* Hero video — full bleed from top */
 .hero { position: relative; background: var(--hero-bg); }
 
 .video-container {
