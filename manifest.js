@@ -1,6 +1,12 @@
 // Reload on bfcache restore (back button) so the form resets cleanly
 window.addEventListener("pageshow", (e) => { if (e.persisted) window.location.reload(); });
 
+// Safari blocks autoplay on slow/new networks — force play on first interaction
+window.addEventListener("click", () => {
+  const v = document.getElementById("manifestVideo");
+  if (v && v.paused) v.play();
+}, { once: true });
+
 const BUTTERBASE_APP_ID = "app_4miwoz3b7e23";
 const BUTTERBASE_API_KEY = "bb_sk_465de144dc744e0b1bf6a1dc972fb92ab21b9797";
 const TABLE_NAME = "trip_wishlists";
