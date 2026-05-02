@@ -1,0 +1,186 @@
+:root {
+  --bg: #0a0a0f;
+  --surface: #13131a;
+  --accent: #7c6af7;
+  --text: #e8e8f0;
+  --muted: #666680;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.logo { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; }
+.tagline { font-size: 0.85rem; color: var(--muted); }
+
+/* Hero video */
+.hero { position: relative; }
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10,10,15,0.2) 0%, rgba(10,10,15,0.75) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 3rem;
+}
+
+.overlay-text .step-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.overlay-text h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.overlay-text .subtext {
+  font-size: 1rem;
+  color: rgba(232, 232, 240, 0.75);
+  line-height: 1.5;
+}
+
+/* Wishlist form */
+.wishlist {
+  padding: 5rem 2rem;
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.wishlist h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+
+.wishlist-sub {
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.wishlist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wishlist-form input {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.2rem;
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.wishlist-form input:focus { border-color: var(--accent); }
+.wishlist-form input::placeholder { color: var(--muted); }
+
+.wishlist-form button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  letter-spacing: -0.01em;
+}
+
+.wishlist-form button:hover { opacity: 0.85; }
+.wishlist-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.form-status {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--accent);
+  min-height: 1.2rem;
+}
+
+/* How it works */
+.how {
+  padding: 3rem 2rem 5rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.step { text-align: center; }
+
+.step-num {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  opacity: 0.35;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.04em;
+}
+
+.step p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 1.5rem 2rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  .overlay-text h1 { font-size: 2.2rem; }
+  .video-overlay { padding: 1.5rem; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+}

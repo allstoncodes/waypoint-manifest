@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waypoint — Manifest Your Trip</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <span class="logo">✈ Waypoint</span>
+    <span class="tagline">Trip idea → you're there.</span>
+  </nav>
+
+  <section class="hero">
+    <div class="video-container">
+      <video
+        id="manifestVideo"
+        src="assets/manifestation.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+      ></video>
+      <div class="video-overlay">
+        <div class="overlay-text">
+          <p class="step-label">STEP 1 — Think it</p>
+          <h1>Sydney Opera House</h1>
+          <p class="subtext">Waypoint researches, plans, and manifests your trip.<br>From idea to arrival in seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wishlist" id="wishlist">
+    <h2>Where do you want to go?</h2>
+    <p class="wishlist-sub">Save your destination — Waypoint will handle the rest.</p>
+    <form id="wishlistForm" class="wishlist-form">
+      <input
+        type="text"
+        id="destination"
+        placeholder="Destination (e.g. Tokyo, Patagonia, Bali)"
+        required
+        autocomplete="off"
+      />
+      <input
+        type="email"
+        id="email"
+        placeholder="Your email"
+        required
+      />
+      <button type="submit" id="submitBtn">Manifest My Trip →</button>
+    </form>
+    <p id="formStatus" class="form-status"></p>
+  </section>
+
+  <section class="how">
+    <div class="steps">
+      <div class="step"><span class="step-num">01</span><p>Share your destination + a photo</p></div>
+      <div class="step"><span class="step-num">02</span><p>Claude researches your perfect trip</p></div>
+      <div class="step"><span class="step-num">03</span><p>AI places you in the scene</p></div>
+      <div class="step"><span class="step-num">04</span><p>You share it. You go.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built at <strong>Builders of Tomorrow</strong> · Computer History Museum · May 2, 2026</p>
+    <p>Powered by Claude · Fal.ai · Butterbase</p>
+  </footer>
+
+  <script src="manifest.js"></script>
+</body>
+</html>
