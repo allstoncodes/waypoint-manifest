@@ -12,16 +12,15 @@ const STEPS = [
   "Generating your personalized plan",
 ];
 
-const STEP_DELAY = 1500; // ms per step
-const FINAL_STEP_DELAY = 2000; // ms for the last "generating" step
+const STEP_DELAY = 1500;
+const FINAL_STEP_DELAY = 2000;
 
 document.getElementById("wishlistForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const destination = document.getElementById("destination").value.trim();
-  const email = document.getElementById("email").value.trim();
+  const tripDescription = document.getElementById("destination").value.trim();
 
-  // Fire-and-forget POST to Butterbase (real data capture, no await)
+  // Fire-and-forget to Butterbase (real data capture)
   fetch(`${BUTTERBASE_URL}/${TABLE_NAME}`, {
     method: "POST",
     headers: {
@@ -29,29 +28,32 @@ document.getElementById("wishlistForm").addEventListener("submit", async (e) => 
       "Authorization": `Bearer ${BUTTERBASE_API_KEY}`,
     },
     body: JSON.stringify({
-      destination,
-      email,
+      destination: tripDescription,
+      email: "",
       created_at: new Date().toISOString(),
       source: "builders-of-tomorrow-2026",
     }),
-  }).catch(() => {}); // silently ignore errors
+  }).catch(() => {});
 
-  // Replace form section with loading animation
-  const wishlistSection = document.getElementById("wishlist");
-  wishlistSection.innerHTML = buildLoader(destination);
+  // Replace form with loading animation
+  document.getElementById("wishlist").innerHTML = buildLoader(tripDescription);
 
-  // Tick through steps, then navigate to plan
   await runSteps();
   window.location.href = "plan.html";
 });
 
-function buildLoader(destination) {
+function buildLoader(tripDescription) {
+  // Show just the first destination phrase for the heading
+  const preview = tripDescription.length > 60
+    ? tripDescription.slice(0, 57) + "…"
+    : tripDescription;
+
   const stepsHtml = STEPS.map((label, i) => {
     const isLast = i === STEPS.length - 1;
     return `
       <div class="step-row" id="step-${i}">
         <span class="step-icon" id="icon-${i}">○</span>
-        <span class="step-label ${isLast ? "step-label--final" : ""}">${label}</span>
+        <span class="step-label${isLast ? " step-label--final" : ""}">${label}</span>
       </div>`;
   }).join("");
 
@@ -59,7 +61,7 @@ function buildLoader(destination) {
     <div class="loader-wrap">
       <div class="loader-heading">
         <span class="loader-spinner"></span>
-        Planning your trip to <strong>${destination}</strong>…
+        Planning: <em>${preview}</em>
       </div>
       <div class="loader-steps">${stepsHtml}</div>
     </div>`;
@@ -68,14 +70,9 @@ function buildLoader(destination) {
 async function runSteps() {
   for (let i = 0; i < STEPS.length; i++) {
     const isLast = i === STEPS.length - 1;
-    const delay = isLast ? FINAL_STEP_DELAY : STEP_DELAY;
-
-    // Animate current step icon
     const icon = document.getElementById(`icon-${i}`);
     if (icon) icon.textContent = "◌";
-
-    await sleep(delay);
-
+    await sleep(isLast ? FINAL_STEP_DELAY : STEP_DELAY);
     if (icon) {
       icon.textContent = "✓";
       icon.classList.add("step-icon--done");

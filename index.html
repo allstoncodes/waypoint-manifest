@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Waypoint — Manifest Your Trip</title>
+  <title>Waypoint — Plan Your Trip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <nav class="nav">
-    <span class="logo">✈ Waypoint</span>
-    <span class="tagline">Trip idea → you're there.</span>
+    <span class="logo">Waypoint</span>
+    <span class="tagline">Trip idea → personalized plan.</span>
   </nav>
 
   <section class="hero">
@@ -24,42 +27,36 @@
       ></video>
       <div class="video-overlay">
         <div class="overlay-text">
-          <p class="step-label">STEP 1 — Think it</p>
-          <h1>Sydney Opera House</h1>
-          <p class="subtext">Waypoint researches, plans, and manifests your trip.<br>From idea to arrival in seconds.</p>
+          <p class="eyebrow">AI-Powered Trip Planning</p>
+          <h1>Your next adventure,<br><em>fully researched.</em></h1>
+          <p class="subtext">Describe your trip in plain English. Waypoint's AI agents research flights, hotels, restaurants, and photography spots — and deliver a personalized plan in seconds.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="wishlist" id="wishlist">
-    <h2>Where do you want to go?</h2>
-    <p class="wishlist-sub">Save your destination — Waypoint will handle the rest.</p>
-    <form id="wishlistForm" class="wishlist-form">
-      <input
-        type="text"
-        id="destination"
-        placeholder="Destination (e.g. Tokyo, Patagonia, Bali)"
-        required
-        autocomplete="off"
-      />
-      <input
-        type="email"
-        id="email"
-        placeholder="Your email"
-        required
-      />
-      <button type="submit" id="submitBtn">Manifest My Trip →</button>
-    </form>
-    <p id="formStatus" class="form-status"></p>
+  <section class="prompt-section" id="wishlist">
+    <div class="prompt-wrap">
+      <h2>Tell me about your trip</h2>
+      <form id="wishlistForm" class="prompt-form">
+        <textarea
+          id="destination"
+          placeholder="e.g. I want to go to Auckland, Sydney, and Melbourne from May 14 to 26 — interested in photography spots, good restaurants, and day hikes."
+          required
+          rows="4"
+          autocomplete="off"
+        ></textarea>
+        <button type="submit" id="submitBtn">Plan My Trip →</button>
+      </form>
+    </div>
   </section>
 
   <section class="how">
     <div class="steps">
-      <div class="step"><span class="step-num">01</span><p>Share your destination + a photo</p></div>
-      <div class="step"><span class="step-num">02</span><p>Claude researches your perfect trip</p></div>
-      <div class="step"><span class="step-num">03</span><p>AI places you in the scene</p></div>
-      <div class="step"><span class="step-num">04</span><p>You share it. You go.</p></div>
+      <div class="step"><span class="step-num">01</span><p>Describe your trip in natural language</p></div>
+      <div class="step"><span class="step-num">02</span><p>Claude runs parallel research agents</p></div>
+      <div class="step"><span class="step-num">03</span><p>AI generates your personalized plan</p></div>
+      <div class="step"><span class="step-num">04</span><p>You review, refine, and go.</p></div>
     </div>
   </section>
 
