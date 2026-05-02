@@ -1,5 +1,5 @@
 // Butterbase config — replace YOUR_APP_ID with your app ID from dashboard.butterbase.ai
-const BUTTERBASE_APP_ID = "555c5173-bfb6-48a4-ab1b-9d91e21e54df";
+const BUTTERBASE_APP_ID = "app_4miwoz3b7e23";
 const BUTTERBASE_API_KEY = "bb_sk_465de144dc744e0b1bf6a1dc972fb92ab21b9797";
 const TABLE_NAME = "trip_wishlists";
 const BUTTERBASE_URL = `https://api.butterbase.ai/v1/${BUTTERBASE_APP_ID}`;
