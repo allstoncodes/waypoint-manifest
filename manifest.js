@@ -1,7 +1,8 @@
-// Butterbase config — replace at venue with live credentials
-const BUTTERBASE_URL = "BUTTERBASE_URL_PLACEHOLDER";
-const BUTTERBASE_API_KEY = "BUTTERBASE_KEY_PLACEHOLDER";
+// Butterbase config — replace YOUR_APP_ID with your app ID from dashboard.butterbase.ai
+const BUTTERBASE_APP_ID = "555c5173-bfb6-48a4-ab1b-9d91e21e54df";
+const BUTTERBASE_API_KEY = "bb_sk_465de144dc744e0b1bf6a1dc972fb92ab21b9797";
 const TABLE_NAME = "trip_wishlists";
+const BUTTERBASE_URL = `https://api.butterbase.ai/v1/${BUTTERBASE_APP_ID}`;
 
 document.getElementById("wishlistForm").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -15,12 +16,11 @@ document.getElementById("wishlistForm").addEventListener("submit", async (e) => 
   status.textContent = "";
 
   try {
-    const response = await fetch(`${BUTTERBASE_URL}/api/${TABLE_NAME}`, {
+    const response = await fetch(`${BUTTERBASE_URL}/${TABLE_NAME}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${BUTTERBASE_API_KEY}`,
-        "apikey": BUTTERBASE_API_KEY,
       },
       body: JSON.stringify({
         destination,
