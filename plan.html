@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trip Plan — Auckland, New Zealand; then Sydney and Melbourne, Australia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap">
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --bg-deep: #ece4d6;
+      --fg: #201a16;
+      --muted: #7a6f66;
+      --muted-soft: #a89e93;
+      --accent: #c65843;
+      --accent-deep: #9b3f2d;
+      --accent-soft: #f4e1d8;
+      --warn: #b75c00;
+      --warn-soft: #fdf0e0;
+      --rule: #e3dcd3;
+      --card-bg: #ffffff;
+      --radius: 6px;
+      --shadow-soft: 0 1px 2px rgba(32, 26, 22, 0.04);
+      --shadow-lift: 0 6px 24px rgba(32, 26, 22, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      background: var(--bg);
+      color: var(--fg);
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 80px 40px 120px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    h1, h2, h3 {
+      font-family: "Fraunces", Georgia, "Times New Roman", serif;
+      font-optical-sizing: auto;
+      letter-spacing: -0.02em;
+      color: var(--fg);
+    }
+    p, li { margin: 6px 0; }
+    a {
+      color: var(--accent-deep);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--accent-soft);
+      text-decoration-thickness: 1.5px;
+      transition: color 180ms ease, text-decoration-color 180ms ease;
+    }
+    a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    /* Hero */
+    header {
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 16px;
+    }
+    .eyebrow {
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      margin: 0 0 14px;
+    }
+    .eyebrow .accent { color: var(--accent); }
+    header h1 {
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-weight: 500;
+      line-height: 1.02;
+      margin: 0 0 22px;
+    }
+    .meta {
+      font-family: "DM Sans", sans-serif;
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin: 0 0 4px;
+    }
+    .travelers {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 4px 0 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      align-items: center;
+    }
+    .travelers strong { color: var(--fg); font-weight: 500; }
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 16px 0 0;
+    }
+    .tech-chip {
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--accent-deep);
+      background: var(--accent-soft);
+      border: 1px solid #e8c5b8;
+      border-radius: 100px;
+      padding: 3px 10px;
+    }
+
+    /* Section header — "01 — POIs" */
+    section {
+      margin-top: 64px;
+      scroll-margin-top: 24px;
+    }
+    section > h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 500;
+      margin: 0 0 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-num {
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    /* Card grid (POIs / Hotels / Restaurants / Photography) */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 1024px) {
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+    }
+    .card-grid > article { margin: 0; }
+
+    /* Card hero image */
+    article figure {
+      margin: -22px -26px 16px;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-top-left-radius: var(--radius);
+      border-top-right-radius: var(--radius);
+      background: var(--bg-deep);
+    }
+    article figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 500ms ease;
+    }
+
+    /* AI-generated image badge */
+    .ai-badge {
+      font-size: 0.72rem;
+      font-style: italic;
+      color: #9ca3af;
+      margin: 0 0 0.75rem 0;
+    }
+
+    /* Cards */
+    article {
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      margin: 14px 0;
+      box-shadow: var(--shadow-soft);
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+    article h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin: 0 0 6px;
+    }
+    article p:first-of-type { color: var(--muted); margin-top: 0; }
+    article ul { padding-left: 22px; margin: 8px 0; }
+    article ul li::marker { color: var(--muted-soft); }
+    article p strong { color: var(--fg); font-weight: 500; }
+
+    /* Hotels: details for pros/cons */
+    details {
+      margin-top: 14px;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background-color 200ms ease, border-color 200ms ease;
+    }
+    details summary {
+      font-weight: 500;
+      color: var(--accent-deep);
+      user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 180ms ease;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before {
+      content: "+";
+      display: inline-block;
+      width: 16px;
+      text-align: center;
+      font-weight: 600;
+      color: var(--accent);
+      transition: transform 200ms ease;
+    }
+    details[open] summary::before { content: "−"; }
+    details:hover { border-color: var(--accent-soft); }
+    details:hover summary { color: var(--accent); }
+    details ul { padding-left: 20px; margin: 8px 0; }
+
+    /* Pills with inline SVG */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.74rem;
+      padding: 3px 10px 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      vertical-align: middle;
+      margin-left: 4px;
+    }
+    .pill.warn { background: var(--warn-soft); color: var(--warn); }
+    .pill svg {
+      width: 13px;
+      height: 13px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .card-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.74rem;
+      padding: 3px 10px 3px 8px;
+      border-radius: 999px;
+      background: var(--bg-deep);
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      vertical-align: middle;
+      margin-top: 0.6rem;
+    }
+    .book-btn {
+      display: inline-block;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      margin-top: 0.5rem;
+      transition: background 0.15s;
+    }
+    .book-btn:hover { background: var(--accent-deep); color: #fff; }
+
+    /* Flight date-pill timeline */
+    .flight-timeline {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .flight-leg {
+      display: grid;
+      grid-template-columns: minmax(190px, max-content) 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 14px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+    .leg-pill {
+      display: inline-flex;
+      align-items: center;
+      font-family: "DM Sans", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-deep);
+      white-space: nowrap;
+    }
+    .leg-pill.leg-interim { background: var(--bg-deep); color: var(--muted); }
+    .leg-detail strong { font-weight: 600; color: var(--fg); }
+    .leg-notes {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .empty {
+      color: var(--muted);
+      font-style: italic;
+      font-family: "Fraunces", serif;
+    }
+
+    /* Motion: gated on user preference */
+    @media (prefers-reduced-motion: no-preference) {
+      article:hover, .flight-leg:hover {
+        transform: translateY(-2px);
+        border-color: var(--accent-soft);
+        box-shadow: var(--shadow-lift);
+      }
+      article:hover figure img { transform: scale(1.04); }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(14px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      header { animation: fadeUp 600ms ease-out both; }
+      section { animation: fadeUp 600ms ease-out both; }
+      section:nth-of-type(1) { animation-delay: 80ms; }
+      section:nth-of-type(2) { animation-delay: 160ms; }
+      section:nth-of-type(3) { animation-delay: 240ms; }
+      section:nth-of-type(4) { animation-delay: 320ms; }
+      section:nth-of-type(5) { animation-delay: 400ms; }
+      section:nth-of-type(6) { animation-delay: 480ms; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body { padding: 56px 24px 80px; }
+      section { margin-top: 48px; }
+      article { padding: 18px 20px; }
+      section > h2 { gap: 12px; }
+    }
+    @media (max-width: 480px) {
+      body { padding: 36px 18px 56px; }
+      header { padding-bottom: 28px; }
+      section > h2 {
+        flex-wrap: wrap;
+        gap: 4px 12px;
+        padding-bottom: 12px;
+      }
+    }
+    @media (max-width: 600px) {
+      .flight-leg {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+    /* Photography intro note */
+    .photo-intro {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0 0 22px 0;
+      padding-left: 12px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* Accordion field rows */
+    .field-rows { margin-top: 12px; }
+    .field-row { border-top: 1px solid var(--rule); }
+    .field-rows .field-row:last-child { border-bottom: 1px solid var(--rule); }
+    .field-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 9px 0;
+      cursor: pointer;
+      text-align: left;
+      font: inherit;
+      color: inherit;
+    }
+    .field-toggle:hover .field-label { color: var(--accent); }
+    .field-chevron {
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+      line-height: 1;
+      width: 14px;
+    }
+    .field-toggle[aria-expanded="true"] .field-chevron { transform: rotate(90deg); }
+    .field-label {
+      font-weight: 500;
+      min-width: 84px;
+      flex-shrink: 0;
+      color: var(--fg);
+      font-size: 0.9rem;
+    }
+    .field-preview {
+      flex: 1;
+      font-size: 0.85rem;
+      color: var(--muted);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    .field-detail {
+      padding: 4px 0 10px 22px;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--fg);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    /* Photo card images: constrained height, not full-bleed hero */
+    .photo-card figure {
+      height: 200px;
+      aspect-ratio: unset;
+    }
+    .video-postcard { margin: 2rem 0; text-align: center; }
+    .video-watermark-wrap { position: relative; display: inline-block; }
+    .video-watermark-wrap::after {
+      content: "Waypoint";
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+    }
+    .share-btn {
+      margin-top: 0.75rem;
+      padding: 0.5rem 1.25rem;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .share-btn:hover { background: #16213e; }
+  </style>
+  <script src="images/01_mount-eden-maungawhau-auckland-new-zeala.jpg"></script>
+</head>
+<body>
+
+
+  <header>
+    <p class="eyebrow"><span class="accent">Itinerary</span> · SFO → Auckland, New Zealand; then Sydney and Melbourne, Australia</p>
+    <h1>Auckland, New Zealand; then Sydney and Melbourne, Australia</h1>
+    <p class="meta">May 15-26, 2026</p>
+    <p class="travelers">
+        <span><strong>Allston</strong></span>    </p>
+    <div class="tech-stack">
+      <span class="tech-chip">Claude Sonnet 4.6</span>
+      <span class="tech-chip">BytePlus Seedream v4.5</span>
+      <span class="tech-chip">BytePlus Seedance 2.0</span>
+      <span class="tech-chip">Fal.ai</span>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="section-num">01</span> POIs</h2>
+      <div class="card-grid">
+        <article>
+<figure><img src="images/02_achilles-point-lookout-auckland-new-zeal.jpg" alt="Auckland Sky Tower" loading="lazy"></figure>          <h3>Auckland Sky Tower</h3>
+<p>Standing at 328 metres, the Sky Tower is New Zealand's tallest freestanding structure and Auckland's most iconic landmark. It offers three observation decks with 360° panoramic views of the city, volcanoes, and harbour. Thrill-seekers can try the SkyJump bungee or the SkyWalk, while the revolving Orbit 360° restaurant offers fine dining above the clouds.</p>          <ul>
+<li><strong>Best time:</strong> Visit at golden hour (late afternoon) or after dark for illuminated city views. Morning visits avoid peak crowds.</li>            <li><strong>Advance booking:</strong> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>required</span></li>
+<li><strong>UV note:</strong> May is autumn in Auckland — UV Index is moderate (3–4) but still requires SPF 30+ during midday (11am–2pm). The observation deck is fully exposed; wear a hat and sunglasses. Best outdoor time is before 10am or after 3pm.</li><li><strong>Booking:</strong> <a href="https://www.skycityauckland.co.nz/attractions/sky-tower/">https://www.skycityauckland.co.nz/attractions/sky-tower/</a></li>          </ul>
+        </article>
+        <article>
+<figure><img src="images/03_piha-beach-lion-rock-west-coast-auckland.jpg" alt="Auckland War Memorial Museum" loading="lazy"></figure>          <h3>Auckland War Memorial Museum</h3>
+<p>Housed in a neoclassical building atop Observatory Hill in Auckland Domain, this world-class museum showcases Māori and Pacific Island culture, New Zealand natural history, and military heritage. Daily Māori cultural performance shows are a highlight. It is considered one of the finest museums in the Southern Hemisphere.</p>          <ul>
+<li><strong>Best time:</strong> Mornings (10am–12pm) are least crowded. Cultural shows run daily — check the schedule online. Plan 2–3 hours minimum.</li>            <li><strong>Advance booking:</strong> No</li>
+<li><strong>UV note:</strong> The museum itself is entirely indoors — zero UV exposure inside. Auckland Domain surrounding the museum is open parkland; if walking the grounds, apply SPF 30+ between 11am–2pm in May. Plenty of shade from mature trees along pathways.</li><li><strong>Booking:</strong> <a href="https://www.aucklandmuseum.com/visit/plan-your-visit">https://www.aucklandmuseum.com/visit/plan-your-visit</a></li>          </ul>
+        </article>
+        <article>
+<figure><img src="images/04_bastion-point-takaparawhau-mission-bay-a.jpg" alt="Waiheke Island Day Trip (Hauraki Gulf)" loading="lazy"></figure>          <h3>Waiheke Island Day Trip (Hauraki Gulf)</h3>
+<p>A 35-minute ferry from downtown Auckland drops you on Waiheke Island, known for its award-winning vineyards, art galleries, olive groves, and beautiful beaches. The broader Hauraki Gulf encompasses 16 islands offering hiking, swimming, birdwatching, and dolphin-watching. Waiheke is the most visitor-friendly for a day trip from the city.</p>          <ul>
+<li><strong>Best time:</strong> Take the first morning ferry (~8am) to maximise your day. May has fewer crowds and cooler, comfortable temperatures ideal for vineyard tours.</li>            <li><strong>Advance booking:</strong> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>required</span></li>
+<li><strong>UV note:</strong> May in Auckland brings moderate UV (index 3–4). Vineyard terraces and coastal walks are fully exposed. Wear SPF 50+, a broad-brimmed hat, and a long-sleeved layer. Seek shade between 11am–2pm during outdoor winery lunches. Evening ferry returns are UV-safe.</li><li><strong>Booking:</strong> <a href="https://www.fullers.co.nz/destinations/waiheke-island/">https://www.fullers.co.nz/destinations/waiheke-island/</a></li>          </ul>
+        </article>
+        <article>
+<figure><img src="images/05_mrs-macquarie-s-point-sydney-australia.jpg" alt="Sydney Opera House" loading="lazy"></figure>          <h3>Sydney Opera House</h3>
+<p>UNESCO World Heritage Site and Australia's most iconic building, the Sydney Opera House was designed by Jørn Utzon and opened in 1973. Distinguished by its soaring white ceramic-tiled shell roof evoking sails, it hosts over 1,500 performances annually. Daily guided tours reveal the engineering genius behind the design.</p>          <ul>
+<li><strong>Best time:</strong> Morning guided tours (from 9am) offer the best access and lighting for photography. Book a performance for evenings to experience it at night.</li>            <li><strong>Advance booking:</strong> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>required</span></li>
+<li><strong>UV note:</strong> Sydney in May has a moderate UV Index (~3–4), with burn time around 30 minutes. The Opera House forecourt is fully exposed to Circular Quay with no shade. Apply SPF 50+, wear sunglasses, and minimize time on the outdoor promenade between 11am–1pm. Morning and late-afternoon visits are safest.</li><li><strong>Booking:</strong> <a href="https://www.sydneyoperahouse.com/visit/tours">https://www.sydneyoperahouse.com/visit/tours</a></li>          </ul>
+        </article>
+        <article>
+<figure><img src="images/01_mount-eden-maungawhau-auckland-new-zeala.jpg" alt="Bondi Beach & Bondi to Coogee Coastal Walk" loading="lazy"></figure>          <h3>Bondi Beach & Bondi to Coogee Coastal Walk</h3>
+<p>Australia's most famous beach, Bondi Beach, features a crescent of golden sand and an energetic surf culture. The world-renowned Bondi to Coogee coastal walk (6km, ~2 hours one-way) hugs sandstone cliffs past sea pools, parks, and hidden coves, ending in the quieter Coogee Beach neighbourhood.</p>          <ul>
+<li><strong>Best time:</strong> May is autumn — cooler temps make the coastal walk ideal (16–19°C). Start by 8–9am to avoid midday UV and crowds. Weekdays are far quieter than weekends.</li>            <li><strong>Advance booking:</strong> No</li>
+<li><strong>UV note:</strong> The entire coastal walk is sun-exposed with minimal shade over cliffs and headlands. In May, Sydney UV is moderate (~3–4) — still enough to cause skin damage in 30 minutes. Wear SPF 50+, a hat, and UV-protective clothing. Start early (before 10am) or late afternoon to avoid peak UV window of 11am–1pm.</li><li><strong>Booking:</strong> <a href="https://www.sydney.com/destinations/sydney/sydney-east/bondi/attractions/bondi-to-coogee-walk">https://www.sydney.com/destinations/sydney/sydney-east/bondi/attractions/bondi-to-coogee-walk</a></li>          </ul>
+        </article>
+        <article>
+<figure><img src="images/02_achilles-point-lookout-auckland-new-zeal.jpg" alt="Sydney Harbour Bridge Climb" loading="lazy"></figure>          <h3>Sydney Harbour Bridge Climb</h3>
+<p>One of the world's great adventure experiences, the BridgeClimb takes small guided groups to the 134-metre summit of the iconic 1932 steel arch bridge. From the top, panoramic views sweep across the Opera House, harbour, and city skyline. Sunrise and twilight climbs are especially spectacular.</p>          <ul>
+<li><strong>Best time:</strong> Book sunrise or twilight climbs for dramatic lighting and cooler temperatures. May daylight hours are shorter, making twilight climbs very popular — book 4–6 weeks in advance.</li>            <li><strong>Advance booking:</strong> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>required</span></li>
+<li><strong>UV note:</strong> The entire climb is fully exposed at height with no shade whatsoever. BridgeClimb provides a full-body suit, but bring SPF 50+ for your face and hands. In May, peak UV risk is between 10am–2pm. Twilight climbs after 4pm are the best UV-safe option for this attraction.</li><li><strong>Booking:</strong> <a href="https://www.bridgeclimb.com/">https://www.bridgeclimb.com/</a></li>          </ul>
+        </article>
+        <article>
+<figure><img src="images/03_piha-beach-lion-rock-west-coast-auckland.jpg" alt="Federation Square & Melbourne Laneways (Hosier Lane)" loading="lazy"></figure>          <h3>Federation Square & Melbourne Laneways (Hosier Lane)</h3>
+<p>Federation Square on the Yarra River is the cultural heart of Melbourne, housing the Ian Potter Centre NGV Australia, ACMI (Australian Centre for the Moving Image), and Koorie Heritage Trust. Nearby, Hosier Lane is Melbourne's most photographed street — an open-air gallery of ever-changing world-class street art, graffiti, and stencil work.</p>          <ul>
+<li><strong>Best time:</strong> Any time of day works. Street art is best photographed in morning light. Federation Square hosts free events — check the calendar at fedsquare.com.</li>            <li><strong>Advance booking:</strong> No</li>
+<li><strong>UV note:</strong> Melbourne in May has a moderate UV Index (around 3) with burn time approximately 30 minutes — lower risk than summer but still requires sunscreen for midday exposure. Hosier Lane is a narrow shaded laneway — low UV risk. Federation Square is open plazas with some shade structures. Apply SPF 30+ for midday visits.</li><li><strong>Booking:</strong> <a href="https://www.fedsquare.com/">https://www.fedsquare.com/</a></li>          </ul>
+        </article>
+        <article>
+<figure><img src="images/04_bastion-point-takaparawhau-mission-bay-a.jpg" alt="Royal Botanic Gardens Melbourne & Shrine of Remembrance" loading="lazy"></figure>          <h3>Royal Botanic Gardens Melbourne & Shrine of Remembrance</h3>
+<p>Melbourne's Royal Botanic Gardens span 38 hectares along the Yarra River, featuring lush themed gardens including Fern Gully, the Ornamental Lake, and native plant collections. Nearby, the Shrine of Remembrance (built 1934) is Victoria's national war memorial offering panoramic city views from its upper balcony.</p>          <ul>
+<li><strong>Best time:</strong> Morning visits (9–11am) offer the best light for photography and cooler autumn temperatures. The popular 'Tan' jogging track circles the gardens.</li>            <li><strong>Advance booking:</strong> No</li>
+<li><strong>UV note:</strong> May in Melbourne brings moderate UV levels (index ~3), with burn time around 30 minutes. The Botanic Gardens have extensive tree canopy providing excellent natural shade — seek the Fern Gully and wooded paths for UV protection. Avoid the open Ornamental Lake area between 11am–1pm without sun protection. The Shrine's exterior terrace is fully exposed.</li><li><strong>Booking:</strong> <a href="https://www.rbg.vic.gov.au/visit-melbourne/">https://www.rbg.vic.gov.au/visit-melbourne/</a></li>          </ul>
+        </article>
+        <article>
+<figure><img src="images/05_mrs-macquarie-s-point-sydney-australia.jpg" alt="Great Ocean Road Day Trip (Twelve Apostles)" loading="lazy"></figure>          <h3>Great Ocean Road Day Trip (Twelve Apostles)</h3>
+<p>One of Australia's most spectacular road trips, the Great Ocean Road runs 243km southwest of Melbourne past dramatic surf beaches, rainforest, and the iconic Twelve Apostles — towering limestone sea stacks rising from the Southern Ocean. Currently 7 stacks remain and are rarely missed by visitors to Melbourne. Note: Parts of the road are in recovery after early 2026 flooding — check road status before visiting.</p>          <ul>
+<li><strong>Best time:</strong> Depart Melbourne before 7am to reach the Twelve Apostles by mid-morning before tour buses arrive. May has fewer tourists and dramatic moody skies. A full day is required (10–12 hours round trip).</li>            <li><strong>Advance booking:</strong> <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>required</span></li>
+<li><strong>UV note:</strong> Clifftop viewing platforms at the Twelve Apostles are completely exposed to Southern Ocean winds and sun with zero shade. In May, UV is moderate (~3) but ocean reflection amplifies exposure. Wear SPF 50+, a hat, and windproof jacket. Morning arrival (before 10am) minimises UV risk. Stay on boardwalks to protect against wind-burned skin.</li><li><strong>Booking:</strong> <a href="https://www.visitgreatoceanroad.org.au/plan/tours/">https://www.visitgreatoceanroad.org.au/plan/tours/</a></li>          </ul>
+        </article>
+        <article>
+<figure><img src="images/01_mount-eden-maungawhau-auckland-new-zeala.jpg" alt="National Gallery of Victoria (NGV)" loading="lazy"></figure>          <h3>National Gallery of Victoria (NGV)</h3>
+<p>Australia's oldest and most visited art museum, the NGV spans two magnificent buildings — NGV International on St Kilda Road and NGV Australia in Federation Square. Together they house Australian, Indigenous, European, Asian, and contemporary international collections. Entry to the permanent collection is free.</p>          <ul>
+<li><strong>Best time:</strong> Open daily 10am–5pm. Visit on weekday mornings for a relaxed experience. Check ngv.vic.gov.au for major touring exhibitions requiring timed entry.</li>            <li><strong>Advance booking:</strong> No</li>
+<li><strong>UV note:</strong> Entirely indoors — no UV exposure risk. This is a perfect refuge during Melbourne's midday UV window (11am–1pm). Combined with a shaded walk through the adjacent Kings Domain gardens, you can structure your day around indoor attractions during peak UV hours.</li><li><strong>Booking:</strong> <a href="https://www.ngv.vic.gov.au/visit/">https://www.ngv.vic.gov.au/visit/</a></li>          </ul>
+        </article>
+      </div>
+  </section>
+
+  <section>
+    <h2><span class="section-num">02</span> Hotels</h2>
+      <p class="empty">No hotels.</p>
+  </section>
+
+  <section>
+    <h2><span class="section-num">03</span> Flights</h2>
+      <ul class="flight-timeline">
+        <li class="flight-leg">
+          <span class="leg-pill leg-outbound">Outbound · May 15, 2026</span>
+          <div class="leg-detail">
+            <strong>SFO → AKL (San Francisco to Auckland, New Zealand)</strong> — Air New Zealand (Recommended – Nonstop) / United Airlines / Fiji Airways / Hawaiian Airlines — Economy Round-Trip: ~$989–$1,396 (Air New Zealand nonstop); ~$1,081–$1,396 (United); ~$1,022+ (Fiji Airways). Business Class One-Way: ~$5,764–$6,089. Prices vary by booking date.
+<span class="leg-notes">Air New Zealand is the top-rated airline on this route with ~11% delay rate and 7 nonstop flights/week. May is one of the more affordable months to fly SFO–AKL. Book on Sundays for up to 17% savings. Economy baggage: 1 checked bag (up to 50 lbs) + 1 carry-on. Connect through LAX, DXB, or YVR for cheaper fares. Return date: May 26, 2026.</span><span class="card-chip">💳 Chase Sapphire Reserve (8x points via Chase Travel portal, trip cancellation insurance up to $20K, Priority Pass lounge access) or Capital One Venture X (5x miles on flights via Capital One Travel, $300 annual travel credit, $395 annual fee).</span><a class="book-btn" href="https://www.airnewzealand.com | https://www.united.com | https://www.google.com/travel/flights" target="_blank" rel="noopener">Book →</a>          </div>
+        </li>
+        <li class="flight-leg">
+          <span class="leg-pill leg-interim">Interim · May 15, 2026</span>
+          <div class="leg-detail">
+            <strong>SFO → SYD (San Francisco to Sydney, Australia)</strong> — United Airlines (Nonstop – Most Popular) / Qantas Airways / Air New Zealand / Fiji Airways / American Airlines — Economy Round-Trip: ~$1,059–$1,343 (United nonstop, May 2026 from ~$1,103); ~$866–$1,458 (Fiji Airways); ~$927+ (Air New Zealand). Average round-trip: ~$785–$1,458. Business Class: ~$9,835+.
+<span class="leg-notes">United is the most popular airline on this route (48% of bookings) with 14 nonstop flights/week. May is shoulder season and Australian autumn – ideal weather (54–73°F). Sydney Airport (SYD) is 8km from city center; T1 handles international arrivals. Airport to CBD via train (T8 line, ~10–15 min). Return date: May 26, 2026.</span><span class="card-chip">💳 Chase Sapphire Reserve (4x points on flights booked direct, 8x via Chase Travel portal, trip interruption insurance, Priority Pass lounge access) or American Express Platinum Card (5x Membership Rewards points on flights booked directly with airlines or via Amex Travel, Global Lounge Collection access at 1,550+ lounges).</span><a class="book-btn" href="https://www.united.com | https://www.qantas.com | https://www.google.com/travel/flights" target="_blank" rel="noopener">Book →</a>          </div>
+        </li>
+        <li class="flight-leg">
+          <span class="leg-pill leg-return">Return · May 15, 2026</span>
+          <div class="leg-detail">
+            <strong>SFO → MEL (San Francisco to Melbourne, Australia)</strong> — United Airlines (Nonstop – Most Popular) / Qantas Airways / Fiji Airways / Air New Zealand / Delta Air Lines — Economy Round-Trip: ~$1,277–$1,588 (United, May 2026 from ~$1,588); ~$942+ (Fiji Airways – cheapest); ~$1,326+ (Air New Zealand); ~$1,441+ (Qantas). One-way from ~$299–$496 (Fiji Airways). Average: ~$978–$1,588 for May.
+<span class="leg-notes">United is the first choice for 58% of travelers on this route. Melbourne Airport (MEL/Tullamarine) is ~20 km from CBD. May is early autumn in Melbourne – cool, great for museums and dining. Airport to city via SkyBus (~AU$19, ~30 min to Southern Cross Station). Qantas operates from T1 (domestic) and T2 (international). Return date: May 26, 2026.</span><span class="card-chip">💳 Chase Sapphire Reserve (8x points via Chase Travel, comprehensive trip cancellation/interruption insurance up to $20K/trip, no foreign transaction fees, Priority Pass lounge access) or Capital One Venture X (5x miles on flights via Capital One Travel, $300 annual travel credit, transfer miles to 15+ loyalty programs).</span><a class="book-btn" href="https://www.united.com | https://www.qantas.com | https://www.google.com/travel/flights" target="_blank" rel="noopener">Book →</a>          </div>
+        </li>
+      </ul>
+  </section>
+
+  <section>
+    <h2><span class="section-num">04</span> Restaurants</h2>
+      <div class="card-grid">
+        <article>
+<figure><img src="images/02_achilles-point-lookout-auckland-new-zeal.jpg" alt="Ahi" loading="lazy"></figure>          <h3>Ahi</h3>
+          <p><strong>Auckland CBD / Commercial Bay</strong> · Modern New Zealand (Fire-kissed, Farm-to-Table)</p>
+<p>A three-hatted waterfront showpiece by chef Ben Bayly, 'ahi' means 'fire' in Te Reo Māori, and fire underpins the kitchen's philosophy. Every menu item is labeled with its region of origin — ingredients sourced from the chef's own organic garden in Patumāhoe to Waiheke oysters. Perch at the Kitchen Counter for a front-row seat. Stunning Waitematā Harbour views. Open 12pm–late, 7 days. Note: a $100/person no-show fee applies. With the MICHELIN Guide arriving in NZ in 2026, this is a prime candidate for recognition. Book ahead — especially for Kitchen Counter seats. Best credit card: Any Visa/Mastercard accepted; Amex may incur a surcharge.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 Visa or Mastercard (e.g. ANZ Airpoints Visa, ASB Visa Rewards) — widely accepted with no surcharge</span></div><div><a class="book-btn" href="https://www.ahirestaurant.co.nz/reservations/" target="_blank" rel="noopener">Book →</a></div>        </article>
+        <article>
+<figure><img src="images/03_piha-beach-lion-rock-west-coast-auckland.jpg" alt="Paris Butter" loading="lazy"></figure>          <h3>Paris Butter</h3>
+          <p><strong>Herne Bay / Ponsonby</strong> · Contemporary Fine Dining (NZ-French Fusion, Tasting Menu)</p>
+<p>Nestled on Jervois Road in Herne Bay, Paris Butter is co-owned by chefs Nick Honeyman and Zennon Wijlens (Cuisine's Best Chef award winner). Their 'Evolution Menu' offers 6 or 8 courses (~NZD 195–240) inspired by seasonal NZ produce, memories, and global travels. Dress code is smart and elegant. Open Tue–Fri from 6pm, Sat from 5:30pm; closed Sun–Mon. Advance booking strongly recommended, especially on weekends. This Michelin-calibre neighbourhood gem is Auckland's most sought-after special-occasion restaurant. Credit card held at time of booking.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 Visa or Mastercard (e.g. BNZ Advantage Visa Platinum, Westpac Airpoints Mastercard) for rewards earn on fine dining spend</span></div><div><a class="book-btn" href="https://parisbutter.co.nz/book" target="_blank" rel="noopener">Book →</a></div>        </article>
+        <article>
+<figure><img src="images/04_bastion-point-takaparawhau-mission-bay-a.jpg" alt="Cassia" loading="lazy"></figure>          <h3>Cassia</h3>
+          <p><strong>Auckland CBD (SkyCity Precinct)</strong> · Modern Indian</p>
+<p>Chef Sid Sahrawat's award-winning (two-hat) modern Indian restaurant marries traditional Indian spice combinations with the finest NZ produce. Tasting menus and à la carte both available. Popular 'Biriyani Thursdays' and a standout cocktail menu featuring Indian-inspired infusions. IMPORTANT NOTE: Cassia's final service at its current SkyCity location is Friday 5 June 2026, so it will still be operating during your May 15–26 visit. A new location (Albert & Wyndham Streets, beside voco Auckland City Centre) will open later in 2026. A $50/person late-cancellation fee applies. Book via SkyCity website.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 Visa or Mastercard (SkyCity accepts all major cards); an Amex card with dining rewards (e.g. American Express Explorer) also accepted here</span></div><div><a class="book-btn" href="https://skycityauckland.co.nz/restaurants/cassia/" target="_blank" rel="noopener">Book →</a></div>        </article>
+        <article>
+<figure><img src="images/05_mrs-macquarie-s-point-sydney-australia.jpg" alt="Bennelong" loading="lazy"></figure>          <h3>Bennelong</h3>
+          <p><strong>Sydney CBD / Circular Quay (Sydney Opera House)</strong> · Contemporary Australian (Fine Dining)</p>
+<p>Housed beneath the iconic sails of the Sydney Opera House, Bennelong is helmed by Executive Chef Peter Gilmore (formerly of the legendary Quay, now closed). The 3-course prix-fixe menu is AUD $225/person; lunch is available Fri–Sun at AUD $130/person (2-course with sparkling wine). Spanning three levels — The Main Dining Room, The Counter (à la carte), and the Bennelong Bar — each offers a different experience. Dress code: smart casual. Book ahead for sunset/window tables. 'Restaurant bookings are essential and can be made online.' Dinner available 7 nights, lunch Fri–Sun.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 American Express (e.g. Amex Platinum or Explorer) for strong dining rewards and concierge booking assistance; Visa/Mastercard also widely accepted</span></div><div><a class="book-btn" href="https://www.bennelong.com.au/make-a-reservation/" target="_blank" rel="noopener">Book →</a></div>        </article>
+        <article>
+<figure><img src="images/01_mount-eden-maungawhau-auckland-new-zeala.jpg" alt="King Clarence" loading="lazy"></figure>          <h3>King Clarence</h3>
+          <p><strong>Sydney CBD (Corner of King & Clarence Streets)</strong> · Contemporary Asian (Chinese, Korean, Japanese Fusion)</p>
+<p>The Bentley Restaurant Group's standout contemporary Asian venue, led by acclaimed chef Khanh Nguyen. This 100-seat restaurant fuses the flavours of China, Korea, and Japan over a custom BBQ grill. Signature dishes include fish finger bao, wood-roasted pork belly ssam, and live lobster from the tank. An eclectic wine list features 40 wines by the glass, curated to pair with Asian-style dishes. House DJs spin Wed–Sat, making evenings vibrant. Banquet menus from AUD $95/person; semi-private dining room seats 14. Open daily 12pm–11pm. Great for business lunches or lively evening dining.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 American Express (e.g. Amex Gold or Platinum) or a premium Visa (e.g. NAB Qantas Rewards Premium Visa) for dining credit earn</span></div><div><a class="book-btn" href="https://www.bentleyrestaurantgroup.com.au/kingclarence" target="_blank" rel="noopener">Book →</a></div>        </article>
+        <article>
+<figure><img src="images/02_achilles-point-lookout-auckland-new-zeal.jpg" alt="Sean's" loading="lazy"></figure>          <h3>Sean's</h3>
+          <p><strong>North Bondi (Beachfront)</strong> · Modern Australian (Coastal, Seasonal)</p>
+<p>Winner of Time Out's Best Special Occasion Restaurant 2025. This iconic beachside restaurant at 270 Campbell Parade is beloved for its soul-filled, locally driven cooking. The legendary roast chicken is a must-order. Expect ~AUD $140 for a three-course meal plus drinks. One of Sydney's most personal and emotionally resonant dining experiences — where food tells the story of place. Fantastic for a birthday, anniversary, or any special occasion. Book well ahead as it fills up fast. Nigella Lawson was a notable 2025 visitor.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 Visa or Mastercard with travel/dining rewards (e.g. Commonwealth Bank Ultimate Awards Mastercard or ANZ Rewards Black Visa)</span></div><div><a class="book-btn" href="https://www.seansrestaurant.com.au/reservations" target="_blank" rel="noopener">Book →</a></div>        </article>
+        <article>
+<figure><img src="images/03_piha-beach-lion-rock-west-coast-auckland.jpg" alt="Attica" loading="lazy"></figure>          <h3>Attica</h3>
+          <p><strong>Ripponlea (Inner South Melbourne)</strong> · Modern Australian Fine Dining (Native / Indigenous Ingredients)</p>
+<p>Chef Ben Shewry's world-renowned restaurant is a regular on the World's 50 Best list, ranked as Australia's top restaurant. The multi-course tasting menu (~AUD $385/person, with a $150/person deposit required at booking) showcases native Australian ingredients like bunya nuts, finger limes, and Rippon Lea Estate herbs. The seasonally changing menu is not published online — expect genuine surprise. Reservations are released 90 days in advance at 9am AEDT; mid-week tables are easier to secure. IMPORTANT: Book NOW for May dates — they will have released May slots already. Open Tue–Sat dinner only. A 10% service fee applies to parties of 6+.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 American Express Platinum (for concierge pre-booking assistance and dining credits) or a Qantas/Velocity premium Visa for points earn on a high-spend meal</span></div><div><a class="book-btn" href="https://www.attica.com.au/reservations" target="_blank" rel="noopener">Book →</a></div>        </article>
+        <article>
+<figure><img src="images/04_bastion-point-takaparawhau-mission-bay-a.jpg" alt="Vue de Monde" loading="lazy"></figure>          <h3>Vue de Monde</h3>
+          <p><strong>Melbourne CBD (55th Floor, Rialto Towers, Collins Street)</strong> · Modern Australian Fine Dining (Sky-High Tasting Menu)</p>
+<p>Perched on Level 55 of Melbourne's iconic Rialto Towers, Vue de Monde offers one of the country's most theatrical fine-dining experiences. Executive Chef Hugh Allen's ever-changing chef's tasting menu celebrates native Australian ingredients, committed to seasonality and locality. Rated 4.9/5 on OpenTable by 2,225+ diners. Reservations are released on the 1st of each month for 3 months ahead (May bookings already open). Open Wed–Sun for dinner; Fri–Sun for lunch. Dietary requirements (vegan, vegetarian, pescatarian, coeliac) must be communicated at booking. Ask for a window seat for city views. Pairs beautifully with a pre-dinner cocktail at the Lui Bar, one floor up.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 American Express Platinum (for Melbourne dining credits and complimentary upgrades at affiliated venues) or ANZ Frequent Flyer Black Visa</span></div><div><a class="book-btn" href="https://vuedemonde.com.au/book-now" target="_blank" rel="noopener">Book →</a></div>        </article>
+        <article>
+<figure><img src="images/05_mrs-macquarie-s-point-sydney-australia.jpg" alt="Cutler & Co (Cutler)" loading="lazy"></figure>          <h3>Cutler & Co (Cutler)</h3>
+          <p><strong>Fitzroy (Inner North Melbourne)</strong> · Modern Australian (A La Carte & Seasonal)</p>
+<p>Flagship restaurant of acclaimed chef Andrew McConnell, housed in a former metalworks factory on Gertrude Street, Fitzroy. Time Out Melbourne's Best Fine Diner pick, Cutler has won fans for its world-class service, creative Australian menu using the country's superb seasonal produce, and a relaxed elegance that avoids stiffness. In 2024 the restaurant returned to a fully à la carte format. Long Sunday lunches are legendary (open from 12pm). Open Wed–Sat from 5:30pm; Sun from 12pm. A 1.3% credit card fee applies. Walk-in spaces are held for guests who can't secure a booking. Perfect for a neighbourhood fine-dining experience away from the CBD.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 Visa (e.g. CommBank Ultimate Awards Visa or Westpac Altitude Black Visa) to avoid the Amex surcharge, while still earning strong rewards points</span></div><div><a class="book-btn" href="https://www.cutlerandco.com.au/reservations" target="_blank" rel="noopener">Book →</a></div>        </article>
+        <article>
+<figure><img src="images/01_mount-eden-maungawhau-auckland-new-zeala.jpg" alt="Ishizuka" loading="lazy"></figure>          <h3>Ishizuka</h3>
+          <p><strong>Melbourne CBD (Bourke Street Laneway Basement)</strong> · Japanese Kaiseki (Two-Hat Fine Dining)</p>
+<p>Melbourne's finest Japanese kaiseki restaurant, tucked in a basement laneway off Bourke Street. Led by head chef Katsuji Yoshino (Michelin-level background), Ishizuka earned two hats in 2026. The seasonal kaiseki menu begins at AUD $315/person with optional alcoholic beverage matching ($250) or non-alcoholic pairing ($80). The theatrical, intimate experience is ideal for special occasions. Signature meat course ('Shiizakana') features Wagyu in two styles: chargrilled Australian Sevens Creek Wagyu and sukiyaki-style A5 Kumamoto Wagyu. Bookings essential and fill quickly — secure well in advance. A hidden gem for Japanese cuisine lovers.</p><p><span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>reservation required</span></p><div><span class="card-chip">💳 American Express (e.g. Amex Gold Rewards or Platinum) for premium dining multipliers, or a Qantas Visa card for strong points earn on a splurge-worthy meal</span></div><div><a class="book-btn" href="https://www.ishizuka.com.au/reservations" target="_blank" rel="noopener">Book →</a></div>        </article>
+      </div>
+  </section>
+
+  <section>
+    <h2><span class="section-num">05</span> Transit</h2>
+      <ul>
+        <li><strong>Auckland – AT HOP Card (Bus, Train & Ferry Network)</strong> — Varies by route; trains every 10–15 min; InnerLink buses every 10–15 min; OuterLink every 15 min; CityLink every 7–8 min — NZ$1 (CityLink); NZ$4+ (other routes); NZ$6.25 airport-to-city bus+train combo; $20 NZD daily fare cap (contactless); $50 NZD 7-day fare cap with AT HOP card <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>recommended</span> · The AT HOP card is the most cost-effective way to use Auckland's buses, trains, and ferries. The InnerLink (green) covers Auckland Museum, Viaduct Harbour, Ponsonby & Newmarket. OuterLink (orange/amber) covers Auckland Zoo & MOTAT. CityLink (red, fully electric) serves Wynyard Quarter harborside. The Explorer Bus (hop-on, hop-off, every 30 min) covers all major tourist spots including Sky Tower. Ferry from Downtown Terminal reaches Devonport and Waiheke Island. SkyDrive express shuttle runs every 30 min between Auckland Airport and SkyCity CBD for NZ$20. Rideshare (Uber, Ola, YourRide) available but 20–30% pricier than buses.</li>
+        <li><strong>Auckland – Ferry Services (Fullers360 / Auckland Ferries)</strong> — Devonport: ~12 min; Waiheke Island: ~35 min; Rangitoto: ~25 min (from Downtown Ferry Building) — Varies by route; AT HOP card accepted on commuter routes; tourist island destinations (Waiheke, Rangitoto, Tiritiri Matangi) use separate ticketing <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>recommended</span> · Auckland is framed by two natural harbours and the Hauraki Gulf – ferries offer one of the best sightseeing experiences. Fullers360 operates regular services from Downtown Ferry Building to Devonport, Waiheke Island, and further islands. A trip on the ferry is a must-do for views of the Auckland Harbour Bridge and waterfront skyline.</li>
+        <li><strong>Sydney – Opal Card (Train, Metro, Bus, Ferry & Light Rail)</strong> — Airport to CBD (T8 train): ~10–15 min every ~10 min; Buses: 5am–midnight; Light Rail: ~5am–midnight (until 1am Fri/Sat); Ferries: multiple routes from Circular Quay — Opal card or contactless credit/debit card tap-on/tap-off; daily and weekly fare caps apply; airport shuttle buses ~A$25/person; taxi CBD ~A$50 <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>recommended</span> · Sydney's public transport is tourist-friendly and covers all major sights. The T8 Airport & South train line connects Sydney Airport to city stations in 10–15 min. Sydney Metro (fully automated, driverless) connects north-west to south-west including Crows Nest, Barangaroo, Martin Place, and Waterloo. Buses cover Bondi Beach, Coogee, and suburbs trains don't reach. Light Rail connects Circular Quay to Darling Harbour, Fish Market, and Randwick. Pay with Opal card (free at newsagents/supermarkets, min $20 load) or contactless card – same fare, but Opal gives weekly/daily fare caps. Avoid peak-hour traffic by using rail over buses.</li>
+        <li><strong>Sydney – Sydney Ferries (Circular Quay Hub)</strong> — Manly (F1): ~30 min; Taronga Zoo (F2): ~12 min; Watsons Bay (F4): ~30 min — Opal card or contactless payment (same rates as other PT modes); 10 ferry routes total, 9 through Circular Quay <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>recommended</span> · A trip on a Sydney Harbour ferry is a highlight of any visit. Sydney Ferries operates 9 routes from Circular Quay with ~14 million passengers/year. The Manly Ferry is one of the world's great ferry journeys. Pay with Opal card or contactless card. Private sightseeing cruises also available from Circular Quay via Captain Cook Cruises.</li>
+        <li><strong>Melbourne – Myki Card (Tram, Train & Bus Network) + Free Tram Zone</strong> — Trams: every 7–10 min peak, 20–30 min off-peak; Trains: every 4–5 min peak, 20 min off-peak, 5am–midnight; SkyBus airport express: ~30 min to Southern Cross Station, 4am–1am daily — Myki card: A$6 for adults, A$3 concession; daily fare cap ~A$10; weekly cap ~A$50. FREE tram travel within CBD Free Tram Zone. SkyBus from MEL airport: ~AU$19. Note: April–May 2026 public transport is FREE in Victoria; from end of May until end of 2026, fares are HALF PRICE. <span class="pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>recommended</span> · Melbourne has the world's largest tram network with 24 routes. Tram travel within the CBD Free Tram Zone (covering Federation Square, Bourke Street Mall, Melbourne Central, Docklands) is completely free – no Myki needed. The free City Circle Tram (green & gold, runs every ~12 min, 9:30am–5pm) loops past major attractions along Flinders St, Harbour Esplanade, and Spring Street. Metro trains connect suburbs to Flinders Street Station (city hub). SkyBus runs express from Melbourne Airport (MEL) to Southern Cross Station. Get a Myki Explorer Pack at PTV hubs – includes card, travel credit, city map, and attraction discounts. Night Network runs all-night Fri–Sat. SPECIAL NOTE: Public transport in Victoria is FREE for April–May 2026, and half-price from June–Dec 2026.</li>
+        <li><strong>Melbourne – City Circle Tram & Rideshare (Uber/DiDi/Taxify)</strong> — City Circle full loop: ~1 hour; Rideshare: varies by destination — City Circle Tram: FREE (runs within CBD only). Rideshare: metered by distance/time via app. Taxis: slightly more expensive than rideshare, found at signposted ranks or hailed on street. · The City Circle Tram is a great free introduction to Melbourne's CBD sights. Rideshare (Uber, DiDi, Taxify) is recommended for trips outside the Free Tram Zone or late-night travel when trams are less frequent. Apps show fare estimates and driver details. For longer distances or outer suburbs, combine metro trains with rideshare.</li>
+      </ul>
+  </section>
+
+  <section>
+    <h2><span class="section-num">06</span> Photography</h2>
+      <p class="photo-intro">Each AI preview shows what this shot would actually look like — rendered from the timing, viewpoint, and composition described in the card below it. These details are your on-location shooting guide: where to stand, when to arrive, and how to frame the scene.</p>
+      <div class="card-grid">
+        <article class="photo-card">
+            <figure><img src="images/02_achilles-point-lookout-auckland-new-zeal.jpg" alt="AI-generated preview of Mount Eden (Maungawhau) – Auckland, New Zealand" loading="lazy"></figure>
+          <h3>Mount Eden (Maungawhau) – Auckland, New Zealand</h3>
+<p class="ai-badge">✦ AI-generated preview · BytePlus Seedream v4.5</p>          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Sunrise (approx. 7:00–7:30 AM in mid-May). In autumn/early winter the low-angle light is especially warm, bathing the Sky Tower and Waitematā Harbour in gold. Stay for blue hour as city lights twinkle on.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Summit crater rim, north-facing edge. Stand on the grassy ridgeline overlooking the crater with the Auckland CBD, Sky Tower, and Waitematā Harbour stretched out behind it. 196 m above sea level gives unobstructed 360° sightlines.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Use the curved crater lip as a sweeping foreground lead-in line, placing the Sky Tower on the right third of the frame with the harbour glittering to the left. A wide-angle (16–24 mm) amplifies the volcanic drama.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Arrive 30–45 min before sunrise on a weekday. Take an Uber or the Mt Eden Road bus from CBD rather than driving to avoid parking chaos. The summit is quietest Mon–Fri before 8 AM; weekends draw joggers and tourists from mid-morning onward.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/03_piha-beach-lion-rock-west-coast-auckland.jpg" alt="AI-generated preview of Achilles Point Lookout – Auckland, New Zealand" loading="lazy"></figure>
+          <h3>Achilles Point Lookout – Auckland, New Zealand</h3>
+<p class="ai-badge">✦ AI-generated preview · BytePlus Seedream v4.5</p>          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Sunrise and the first 30 minutes after (approx. 7:10 AM in mid-May). The east-facing headland catches the sun rising directly over the Hauraki Gulf, painting Rangitoto Island and the harbour in amber.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Extended viewing platform at the rocky headland at the eastern end of Ladies Bay, St Heliers. Face north-west to frame Rangitoto Island centrally with Auckland City visible to the west and the Coromandel Peninsula in the far distance.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Position Rangitoto Island dead-centre in the frame and use the curved coastline of St Heliers Bay as an S-curve leading from the lower-left corner up to the island – a classically cinematic 'horizon with anchor' composition.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Catch a 20-minute bus from Auckland Central to St Heliers, then walk 30 min along Cliff Road to the point. Parking at the small car park fills fast on weekends; bus access on weekday mornings means almost no competition for the platform.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/04_bastion-point-takaparawhau-mission-bay-a.jpg" alt="AI-generated preview of Piha Beach (Lion Rock) – West Coast Auckland, New Zealand" loading="lazy"></figure>
+          <h3>Piha Beach (Lion Rock) – West Coast Auckland, New Zealand</h3>
+<p class="ai-badge">✦ AI-generated preview · BytePlus Seedream v4.5</p>          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Sunset golden hour (approx. 5:10 PM in mid-May). West-facing black-sand beach on the Tasman Sea catches the last light of day; dramatic clouds in autumn create fiery skies.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Stand at the waterline directly in front of Lion Rock (the basalt stack at the centre of the beach) at low tide. The wet sand creates perfect mirror reflections of the rock and sunset sky.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Shoot wide (14–20 mm) in portrait orientation: foreground mirror-reflection, Lion Rock as the vertical anchor mid-frame, blazing sky occupying the upper half. The receding wave lines add cinematic depth.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Avoid weekends – Piha is the most popular West Coast beach. Visit on a weekday and check tide times; low tide not only reveals better reflections but opens up extra beach space that crowds don't reach. Arrive 1 hour before sunset for prime position.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/05_mrs-macquarie-s-point-sydney-australia.jpg" alt="AI-generated preview of Bastion Point (Takaparawhau) / Mission Bay – Auckland, New Zealand" loading="lazy"></figure>
+          <h3>Bastion Point (Takaparawhau) / Mission Bay – Auckland, New Zealand</h3>
+<p class="ai-badge">✦ AI-generated preview · BytePlus Seedream v4.5</p>          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Sunrise (approx. 7:05 AM in mid-May) for soft light over the harbour. The symmetrical Michael Savage Memorial gardens glow in morning warmth; the city skyline is reflected in the calm harbour below.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Stand at the Bastion Point headland near the Michael Savage Memorial, looking back north-west across the harbour toward the CBD. The formal terraced gardens below act as a perfect foreground leading up to the skyline.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Use the memorial's symmetrical garden terraces as converging perspective lines that draw the eye to the Auckland skyline. Include a sliver of harbour on each side for depth and balance – a cinematic wide establishing shot.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>This is one of Auckland's quieter east-coast viewpoints. On weekday mornings, especially in May (off peak), you are likely to have the lawns largely to yourself. Catch the bus from Britomart and walk from Mission Bay (15 min) to avoid parking issues.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/01_mount-eden-maungawhau-auckland-new-zeala.jpg" alt="AI-generated preview of Mrs Macquarie's Point – Sydney, Australia" loading="lazy"></figure>
+          <h3>Mrs Macquarie's Point – Sydney, Australia</h3>
+<p class="ai-badge">✦ AI-generated preview · BytePlus Seedream v4.5</p>          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Sunrise (approx. 6:50 AM in mid-May). The Royal Botanic Garden gates open just before sunrise – arrive 25–30 min beforehand for the pre-dawn blue hour when the Opera House sails are lit and the sky transitions from deep blue to pink. Weekday mornings offer fewer competing photographers.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>The elevated sandstone bench platform at Mrs Macquarie's Chair, Royal Botanic Garden. This is the only public spot in Sydney where you can frame both the Opera House AND the Harbour Bridge in a single wide-angle shot across the water.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Shoot in portrait orientation with the Opera House on the left third and the Harbour Bridge arching to the right third; use the curved harbour shoreline as a natural bottom lead-in. Try the lower waterfront path below the Chair for a more intimate, horizon-level perspective.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Arrive before 6:30 AM on weekdays in May. Sunrise in Sydney in May is around 6:50 AM, meaning you can reach the point well before tourists and cruise groups arrive. Cooler May temperatures make the 20-minute walk from Circular Quay far more comfortable than summer visits.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/02_achilles-point-lookout-auckland-new-zeal.jpg" alt="Observatory Hill – Sydney, Australia" loading="lazy"></figure>
+          <h3>Observatory Hill – Sydney, Australia</h3>
+          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Late afternoon golden hour (approx. 4:30–5:30 PM in mid-May). West-facing aspect means the Harbour Bridge and The Rocks precinct are front-lit in warm afternoon gold. Shoot until 30 min after sunset for blue hour.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>North end of Observatory Hill Park, overlooking the Harbour Bridge with the historic Rocks neighbourhood – sandstone colonial buildings, narrow lanes, and the old garrison wall – filling the foreground. The rotunda and a centuries-old Moreton Bay fig tree provide natural framing elements.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Shoot through the fig tree branches or between the rotunda columns to frame the Harbour Bridge with historical architecture in the foreground – a layered, cinematic depth composition that most tourists never discover from ground level at Circular Quay.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Most tourists don't know this viewpoint exists; it is far less visited than Mrs Macquarie's Point. A weekday late afternoon visit in May means minimal competition. Reach it via the short uphill walk from The Rocks on Lower Fort Street.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/03_piha-beach-lion-rock-west-coast-auckland.jpg" alt="Bondi to Coogee Coastal Walk (Bondi Icebergs Viewpoint) – Sydney, Australia" loading="lazy"></figure>
+          <h3>Bondi to Coogee Coastal Walk (Bondi Icebergs Viewpoint) – Sydney, Australia</h3>
+          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Sunrise (approx. 6:50 AM in mid-May). East-facing cliffs catch the rising sun directly; long-exposure shots of the Icebergs pool with waves crashing over the walls are most dramatic in the soft pink dawn light. Overcast or stormy days add extra drama.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Stand on the grassy clifftop path just south of the Bondi Icebergs Club, looking north back over the pools, the crashing waves, and Bondi Beach sweeping into the distance with the headland beyond.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Use the Icebergs pool walls as strong geometric foreground lines leading the eye to the curved arc of Bondi Beach in the background. A 1/4 sec shutter speed blurs the breaking waves into cinematic silk over the pool edge.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Start the walk as early as possible – the section near Bondi and Coogee gets busy quickly. Weekday mornings in May are significantly quieter than summer weekends. The walk itself is 6 km; the Icebergs viewpoint is best accessed from the Bondi end before 7:30 AM.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/04_bastion-point-takaparawhau-mission-bay-a.jpg" alt="Flinders Street Station & Federation Square – Melbourne, Australia" loading="lazy"></figure>
+          <h3>Flinders Street Station & Federation Square – Melbourne, Australia</h3>
+          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Blue hour / golden hour at sunset (approx. 5:20–5:50 PM in mid-May) and the 20–30 min after, when the station's yellow Edwardian facade is bathed in warm light and tram light trails begin to form. Early morning (6:30–7:30 AM) is equally rewarding for warm facade light with far fewer crowds.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Stand on Princes Bridge facing north-west. This gives you Flinders Street Station's iconic dome and clocks in the left frame, Federation Square's abstract geometry to the right, the Yarra River as a foreground mirror below, and the Arts Centre spire visible in the distance.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Use a 10–20 second long exposure at blue hour: the Yarra River becomes a mirror for the station's golden lights, tram light trails streak across Flinders Street, and the illuminated clocks anchor the scene. A wide-angle (16–20 mm) captures the entire cinematic tableau.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>The station is very busy on weekday mornings during commute hours. Choose early morning (before 7:30 AM) on a weekday for minimal foot traffic, or shoot from the bridge at blue hour on a Sunday evening when commuter crowds are at their lowest. Avoid shooting from the bridge with a tripod during heavy pedestrian flow as vibrations will blur long exposures.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/05_mrs-macquarie-s-point-sydney-australia.jpg" alt="Hosier Lane (Street Art Laneways) – Melbourne, Australia" loading="lazy"></figure>
+          <h3>Hosier Lane (Street Art Laneways) – Melbourne, Australia</h3>
+          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Early morning (7:00–9:00 AM) for soft, even light filtering between the narrow walls, or late afternoon (3:30–5:00 PM) when the light is directional and dynamic. Post-rain visits are particularly rewarding for cobblestone reflections.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Enter from Flinders Lane and shoot looking north up the laneway: the perspective of converging walls of floor-to-ceiling murals creates a powerful vanishing-point tunnel. Rutledge Lane branching off the right adds a secondary layer. The cobblestones become a reflective foreground after rain.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Stand at the Flinders Lane entrance and shoot at f/8 for maximum depth of field – the converging mural walls compress into an explosion of colour stretching to a vanishing point. A lone walking figure at the far end instantly adds cinematic scale. After rain, shoot low (ground level) to capture cobblestone reflections of the murals.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>This is Melbourne's most famous laneway and gets busy by mid-morning. Arrive before 8 AM for an almost empty lane. AC/DC Lane (nearby) is significantly quieter and has equally high-quality art. If Hosier Lane is crowded, turn right up the hill to AC/DC Lane for crowd-free alternatives.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/01_mount-eden-maungawhau-auckland-new-zeala.jpg" alt="Princes Pier – Port Melbourne, Melbourne, Australia" loading="lazy"></figure>
+          <h3>Princes Pier – Port Melbourne, Melbourne, Australia</h3>
+          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Sunset (approx. 5:20–5:50 PM in mid-May). The pier faces west across Port Phillip Bay; the hundreds of decaying wooden pylons ('The Pins') reflect the orange and pink sky in the calm bay waters. May's cooler temperatures produce rich, saturated sunset colours.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Walk to the end of the pier and shoot back toward the city skyline at golden hour, or face west from mid-pier to capture the symmetrical rows of wooden pylons converging toward the setting sun with the bay's surface as a mirror.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Use the double rows of wooden pylons as strong symmetrical lead-in lines that draw the eye toward the glowing sunset at the pier's end. Shoot wide for a cinematic scope or zoom in (70–200 mm) to compress the pylon rows and stack the city skyline behind the pier structure.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Princes Pier is one of Melbourne's most underrated hidden gems compared to the heavily visited St Kilda. Take tram 109 to its Port Melbourne terminus and walk; the pier is rarely crowded on weekday evenings in May. Arrive 45 min before sunset to scout the best pylon lines.</div>
+            </div>
+          </div>
+        </article>
+        <article class="photo-card">
+            <figure><img src="images/02_achilles-point-lookout-auckland-new-zeal.jpg" alt="Albert Park Lake – Melbourne, Australia" loading="lazy"></figure>
+          <h3>Albert Park Lake – Melbourne, Australia</h3>
+          <div class="field-rows">
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Timing</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Sunrise (approx. 7:15 AM in mid-May). The south shore of the lake faces north toward the Melbourne CBD; on calm, clear May mornings the glassy lake surface creates a perfect mirror reflection of the city skyline and clouds.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Viewpoint</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>South shore near the Carousel Café, shooting north-northwest across the lake. The Melbourne CBD skyscrapers (including Eureka Tower and Australia 108) are framed across the water, with the elegant curve of palm trees on the left adding tropical foreground interest.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Composition</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>On a calm morning, use a 2–5 second exposure to smooth any slight ripples in the lake into a perfect mirror. Place the skyline on the upper third, the reflection filling the lower two-thirds. A single rower or cyclist on the lake path adds a cinematic human element to the wide urban landscape.</div>
+            </div>
+            <div class="field-row">
+              <button class="field-toggle" aria-expanded="false" onclick="toggleField(this)">
+                <span class="field-chevron">›</span>
+                <span class="field-label">Crowds</span>
+                <span class="field-preview"></span>
+              </button>
+              <div class="field-detail" hidden>Albert Park is primarily known as the F1 Grand Prix circuit; outside race weekend it is very peaceful. Weekday mornings in May (well outside the March Grand Prix) attract mainly joggers and dog walkers who don't obstruct water reflections. Arrive before 7 AM for perfectly still water before the morning breeze picks up.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+  </section>
+
+  <script>
+    function toggleField(btn) {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      btn.nextElementSibling.hidden = expanded;
+    }
+
+    // Populate each preview span with the first sentence of its field detail
+    document.querySelectorAll('.field-row').forEach(function(row) {
+      var detail = row.querySelector('.field-detail');
+      var preview = row.querySelector('.field-preview');
+      var text = detail.textContent.trim();
+      var match = text.match(/^.+?[.!?](?:\s|$)/);
+      preview.textContent = match ? match[0].trim() : (text.length > 72 ? text.slice(0, 72) + '…' : text);
+    });
+  </script>
+</body>
+</html>
